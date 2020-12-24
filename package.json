@@ -1,0 +1,12 @@
+{
+  "name": "perf-check-commander",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index"
+  },
+  "keywords": [],
+  "author": "Lee Sang Moon <moonysl@hanmail.net>",
+  "license": "ISC"
+}
