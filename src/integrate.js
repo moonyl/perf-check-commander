@@ -104,7 +104,7 @@ emitter.on("finished", () => {
 
 const dataLabels = filesState.map((state) => state.label);
 dataLabels.forEach((label) => {
-  const counted = require("./counted.json");
+  const counted = require("../counted.json");
   const countedWriter = fs.createWriteStream(`counted-${label}.json`);
   let lastCounted = 0;
   const countSeparated = counted.map((item) => {
@@ -117,7 +117,7 @@ dataLabels.forEach((label) => {
 
   countedWriter.write(JSON.stringify(countSeparated));
 
-  const measured = require("./measured.json");
+  const measured = require("../measured.json");
   const measuredWriter = fs.createWriteStream(`measured-${label}.json`);
   let lastMeasured = 0;
   const measureSeparated = measured.map((item) => {
@@ -130,7 +130,7 @@ dataLabels.forEach((label) => {
 
   measuredWriter.write(JSON.stringify(measureSeparated));
 
-  const expected = require("./expected.json");
+  const expected = require("../expected.json");
   const expectedWriter = fs.createWriteStream(`expected-${label}.json`);
   let lastExpected = 0;
   const expectSeparated = expected.map((item) => {

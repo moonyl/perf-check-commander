@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index"
+    "start": "node performanceTester/bin/index --begin 1 --count 30"
   },
   "keywords": [],
   "author": "Lee Sang Moon <moonysl@hanmail.net>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "yargs": "^16.2.0"
+  }
 }
