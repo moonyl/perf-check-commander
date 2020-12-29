@@ -1,9 +1,11 @@
 const { spawn } = require("child_process");
+const path = require("path");
 
 class TestProcessor {
   constructor() {
+    //console.error("check: dirname", __dirname);
     this.proc = spawn("rtspPerfUsingLive555", ["23.9"], {
-      cwd: "F:/pilot/rtspPerfUsingLive555/cmake-build-release/bin",
+      cwd: path.join(__dirname, "../bin"),
     });
     this.proc.stderr.on("data", (data) => {
       // nothing to do
