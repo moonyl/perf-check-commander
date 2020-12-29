@@ -1,12 +1,17 @@
+var fs = require("fs");
+
 class PerfChecker {
   delayedConnect = null;
   connectCount = 0;
   unstableCount = 0;
 
-  constructor(begin, count, tester) {
+  constructor({ begin, count, tester, resultDir, recName }) {
     this.begin = begin;
     this.count = count;
     this.tester = tester;
+
+    const filename = `${resultDir}/rec-${recName}.rec`;
+    this.writer = fs.createWriteStream(filename);
   }
 
   handleReport = () => {
@@ -45,7 +50,7 @@ class PerfChecker {
     //console.error({ merged });
     this.controlStream(merged);
 
-    writeLog(merged);
+    writeLog(merged, this.writer);
 
     const { toRemove } = merged;
     removeNotWorking(this.tester, toRemove);
@@ -99,11 +104,7 @@ function urlToConnect(connectIndex) {
   return `rtsp://192.168.17.2:9554/proxyStream-${connectIndex}`;
 }
 
-var fs = require("fs");
-const filename = `rec-${new Date().valueOf()}.rec`;
-const writer = fs.createWriteStream(filename);
-
-function writeLog(merged) {
+function writeLog(merged, writer) {
   const { counted, expected, measuredFrameRate } = merged;
   if ("counted" in merged) {
     const record = {
