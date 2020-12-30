@@ -11,7 +11,7 @@ if (!fs.existsSync(resultDir)) {
   fs.mkdirSync(resultDir);
 }
 //console.error("resultDir:", { resultDir });
-const testProc = new TestProcessor();
+const testProc = new TestProcessor({ errDir: resultDir, errName: recName });
 const perfChecker = new PerfChecker({
   begin,
   count,

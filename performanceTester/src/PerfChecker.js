@@ -27,9 +27,14 @@ class PerfChecker {
       this.delayedConnect = setInterval(() => {
         //console.log({ connect });
         //console.error((this.connectCount % this.count) + this.begin);
-        this.tester.addConnect(
-          urlToConnect((this.connectCount % this.count) + this.begin)
-        );
+        try {
+          this.tester.addConnect(
+            urlToConnect((this.connectCount % this.count) + this.begin)
+          );
+        } catch (err) {
+          console.log(err);
+          return;
+        }
 
         this.connectCount++;
       }, 1000);

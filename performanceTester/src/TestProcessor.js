@@ -1,15 +1,21 @@
 const { spawn } = require("child_process");
 const path = require("path");
+const fs = require("fs");
 
 class TestProcessor {
-  constructor() {
+  constructor({ errDir, errName }) {
     //console.error("check: dirname", __dirname);
+
+    const filename = `${errDir}/error-${errName}.err`;
+    this.writer = fs.createWriteStream(filename);
+
     this.proc = spawn("rtspPerfUsingLive555", ["23.9"], {
       cwd: path.join(__dirname, "../bin"),
     });
     this.proc.stderr.on("data", (data) => {
       // nothing to do
       // console.error("error:", data.toString());
+      this.writer.write(data.toString() + "\n");
     });
   }
 
