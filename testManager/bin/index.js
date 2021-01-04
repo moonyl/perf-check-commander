@@ -10,10 +10,15 @@ const { spawn } = require("child_process");
 //   { begin: 1, count: 30 },
 // ];
 
+// configures = [
+//   { begin: 1, count: 30 },
+//   { begin: 1, count: 30 },
+//   { begin: 1, count: 30 },
+// ];
+
 configures = [
-  { begin: 1, count: 30 },
-  { begin: 1, count: 30 },
-  { begin: 1, count: 30 },
+  { begin: 1, count: 23 },
+  { begin: 24, count: 22 },
 ];
 
 const handleStderr = (data) => {

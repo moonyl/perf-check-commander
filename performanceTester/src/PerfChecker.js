@@ -73,23 +73,41 @@ class PerfChecker {
 
 function seperateReport(data) {
   const splited = data.toString().split("\r\n");
-  //console.log(splited);
-  return splited.reduce((accumulator, line) => {
-    if (line === "") {
-      return accumulator;
-    }
-    const parsed = JSON.parse(line);
-    if ("counted" in parsed) {
-      return { ...accumulator, ...parsed };
-    }
-    if ("name" in parsed) {
-      const toRemove = "toRemove" in accumulator ? accumulator.toRemove : [];
-      return { ...accumulator, toRemove: [...toRemove, { ...parsed }] };
-    }
+  return splited.slice(0, splited.length - 1).map((jsonStr) => {
+    const parsed = JSON.parse(jsonStr);
+    console.log(parsed);
+    return parsed;
+  });
 
-    console.error({ accumulator });
-    return accumulator;
-  }, {});
+  // //console.log(splited);
+  // return splited.reduce((accumulator, currentLine) => {
+  //   if (currentLine === "") {
+  //     return accumulator;
+  //   }
+  //   const parsed = JSON.parse(currentLine);
+  //   return { ...accumulator, parsed };
+  //   // const { result, state } = parsed;
+  //   // switch (result) {
+  //   //   case "stats":
+  //   //     return { ...accumulator, ...state };
+  //   //   case "abnormal":
+  //   //     const toRemove = "toRemove" in accumulator ? accumulator.toRemove : [];
+  //   //     return { ...accumulator, toRemove: [...toRemove, { ...state }] };
+  //   //   case "added":
+  //   //     break;
+  //   // }
+
+  //   // if ("counted" in parsed) {
+  //   //   return { ...accumulator, ...parsed };
+  //   // }
+  //   // if ("name" in parsed) {
+  //   //   const toRemove = "toRemove" in accumulator ? accumulator.toRemove : [];
+  //   //   return { ...accumulator, toRemove: [...toRemove, { ...parsed }] };
+  //   // }
+
+  //   console.error({ accumulator });
+  //   return accumulator;
+  // }, {});
 }
 
 const removeNotWorking = (tester, toRemove) => {
