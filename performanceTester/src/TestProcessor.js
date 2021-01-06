@@ -9,7 +9,11 @@ class TestProcessor {
     const filename = `${errDir}/error-${errName}.err`;
     this.writer = fs.createWriteStream(filename);
 
-    this.proc = spawn("rtspPerfUsingLive555", ["23.9"], {
+    const progName =
+      process.platform === "win32"
+        ? "rtspPerfUsingLive555"
+        : "./rtspPerfUsingLive555";
+    this.proc = spawn(progName, ["23.9"], {
       cwd: path.join(__dirname, "../bin"),
     });
     this.proc.stderr.on("data", (data) => {
@@ -25,21 +29,17 @@ class TestProcessor {
 
   addConnect = (url) => {
     this.proc.stdin.write(
-      JSON.stringify({
-        url,
-      }) + "\n"
+      JSON.stringify({ cmd: "add", param: { url } }) + "\n"
     );
   };
 
   removeOne = () => {
-    this.proc.stdin.write("removeOne\n");
+    this.proc.stdin.write(JSON.stringify({ cmd: "removeOne" }) + "\n");
   };
 
   removeConnect = (disconnect) => {
     this.proc.stdin.write(
-      JSON.stringify({
-        disconnect,
-      }) + "\n"
+      JSON.stringify({ cmd: "disconnect", param: disconnect }) + "\n"
     );
   };
 }

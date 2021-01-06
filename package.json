@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "config": {"resultDir" : "12-30 17h26m"},
+  "config": {
+    "resultDir": "12-30 17h26m"
+  },
   "scripts": {
     "oldstart": "node performanceTester/bin/index --begin 1 --count 30",
     "start": "node testManager/bin/index",
     "categorize": "node categorizer/bin/index --resultBase results --choice \"%npm_package_config_resultDir%\"",
-    "integrate" : "node integrator/bin/index --resultBase results --choice \"%npm_package_config_resultDir%\""
+    "integrate": "node integrator/bin/index --resultBase results --choice \"%npm_package_config_resultDir%\""
   },
   "keywords": [],
   "author": "Lee Sang Moon <moonysl@hanmail.net>",
@@ -17,4 +19,3 @@
     "yargs": "^16.2.0"
   }
 }
-
